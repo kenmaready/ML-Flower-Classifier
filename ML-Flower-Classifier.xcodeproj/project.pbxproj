@@ -26,6 +26,7 @@
 		9BBF649E289A998A00B2BE6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BBF64A0289A998A00B2BE6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BBF64A6289A99CE00B2BE6C /* FlowerClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = FlowerClassifier.mlmodel; sourceTree = "<group>"; };
+		9BBF64A8289AD5D700B2BE6C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +43,7 @@
 		9BBF6486289A998800B2BE6C = {
 			isa = PBXGroup;
 			children = (
+				9BBF64A8289AD5D700B2BE6C /* README.md */,
 				9BBF6491289A998800B2BE6C /* ML-Flower-Classifier */,
 				9BBF6490289A998800B2BE6C /* Products */,
 			);
