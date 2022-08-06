@@ -8,20 +8,23 @@
 import UIKit
 import CoreML
 import Vision
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var mainImageView: UIImageView!
     let imagePicker = UIImagePickerController()
+    var wikiRequest = WikiRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePickerSetup()
+        wikiRequest.delegate = self
     }
-
-    
-
 }
+
+// MARK: - UIImaagePickerControllerDelegate
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerSetup() {
@@ -55,7 +58,9 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
     }
 }
 
-extension ViewController {
+// MARK: - WikiRequestDelagate
+
+extension ViewController: WikiRequestDelegate {
     func detect(_ image: CIImage) {
         print("detect() function called....")
         guard let model = try? VNCoreMLModel(for: FlowerClassifier().model) else {
@@ -69,11 +74,12 @@ extension ViewController {
                 fatalError("Error occurred during processing of model or retrieval of results from model")
             }
             
-            print("results: \(results)")
-            
             let classification = request.results?.first as? VNClassificationObservation
-            print("This is a \(classification?.identifier ?? "not sure") with \(classification?.confidence ?? 0.00)% confidence")
+            
             self.navigationItem.title = classification?.identifier.capitalized
+            if let flowername = classification?.identifier {
+                self.wikiRequest.fetchInfo(flowername)
+            }
         }
         
         let handler = VNImageRequestHandler(ciImage: image)
@@ -84,4 +90,14 @@ extension ViewController {
             print("Error occurred during request of analyses from MLModel")
         }
     }
+
+    func didUpdateInfo(_: WikiInfo) {
+            
+    }
+    
+    func didFailWithError(_: Error) {
+        
+    }
+    
+    
 }
