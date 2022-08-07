@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
 
 protocol WikiRequestDelegate {
     func didUpdateInfo(_: WikiInfo)
