@@ -14,6 +14,7 @@ import SwiftyJSON
 class ViewController: UIViewController {
 
     @IBOutlet weak var mainImageView: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
     let imagePicker = UIImagePickerController()
     var wikiRequest = WikiRequest()
     
@@ -68,6 +69,7 @@ extension ViewController: WikiRequestDelegate {
         }
         
         print("request being made...")
+        descriptionLabel.text = ""
         
         let request = VNCoreMLRequest(model: model) { request, error in
             guard let results = request.results as? [VNClassificationObservation] else {
@@ -91,12 +93,16 @@ extension ViewController: WikiRequestDelegate {
         }
     }
 
-    func didUpdateInfo(_: WikiInfo) {
-            
+    func didUpdateInfo(_ info: WikiInfo) {
+        DispatchQueue.main.async {
+            self.descriptionLabel.text = info.desc
+        }
     }
     
     func didFailWithError(_: Error) {
-        
+        DispatchQueue.main.async {
+            self.descriptionLabel.text = "(No description found on Wikipedia)"
+        }
     }
     
     
