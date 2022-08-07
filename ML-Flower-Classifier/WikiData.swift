@@ -20,4 +20,9 @@ struct Page: Decodable {
     let pageid: Int
     let title: String
     let extract: String
+    let thumbnail: Thumbnail
+}
+
+struct Thumbnail: Decodable {
+    let source: String
 }

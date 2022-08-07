@@ -8,6 +8,7 @@
 import UIKit
 import CoreML
 import Vision
+import SDWebImage
 
 class ViewController: UIViewController {
 
@@ -93,6 +94,9 @@ extension ViewController: WikiRequestDelegate {
 
     func didUpdateInfo(_ info: WikiInfo) {
         DispatchQueue.main.async {
+            if let imageUrl = URL(string: info.image) {
+                self.mainImageView.sd_setImage(with: imageUrl)                
+            }
             self.descriptionLabel.text = info.desc
         }
     }

@@ -10,4 +10,5 @@ import Foundation
 struct WikiInfo {
     let title: String
     let desc: String
+    let image: String
 }
